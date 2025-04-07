@@ -1,0 +1,164 @@
+Try ve Catch:(istisna güvenliği)
+
+Try kod bloğu içinde throw anahtar kelimesi ile bir hata kodu gönderildiğinde, hata kodunun veri türüne karşılık gelen(birden fazla catch olabilir, 
+bu catchler farklı veri türüne sahip olabilir, fırlatılan hangi veri türündeyse o cathce girer) catch anahtar kelimesinin bulunduğu kod bloğu tarafından işlem yapılır. 
+Catch metodunun parametresiyle gelen hata mesajı çıktıya yazdırılır.
+
+try-catch Bloklarının Çalışma Mantığı
+
+    try Bloğu: Bu blok, içinde hata (istisna) meydana gelebilecek kodları içerir. Eğer bu blok içinde bir hata oluşursa, kontrol catch bloğuna aktarılır.
+    catch Bloğu: Bu blok, try bloğunda meydana gelen hataları (istisnaları) yakalar ve bunları işler. Farklı türdeki hatalar için birden fazla catch bloğu tanımlanabilir.
+
+ #include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        int a = 10;
+        int b = 0;
+        if (b == 0) {
+            throw "Bölen sıfır olamaz!";  // Hata fırlat
+        }
+        int c = a / b;
+        cout << "Sonuç: " << c << endl;
+    }
+    catch (const char* hataMesaji) {
+        cout << "Hata: " << hataMesaji << endl;  // Hata mesajını yakala ve yazdır
+    }
+    
+    return 0;
+}
+
+throw 20;  // int türünde bir istisna fırlatır
+throw "Hata mesajı";  // const char* türünde bir istisna fırlatır
+
+Birden fazla catch bloğu tanımlanabilir ve her biri farklı türdeki istisnaları yakalayabilir. Ayrıca, türüne bakılmaksızın herhangi bir istisnayı yakalayabilecek 
+bir catch bloğu da tanımlanabilir:	
+	catch(...){};
+
+C++98'de, kaynak yönetimi genellikle try-catch blokları ile birlikte kullanılır. Dinamik bellek tahsisi gibi işlemler sırasında meydana gelebilecek hataları 
+yakalamak ve belleği doğru şekilde serbest bırakmak önemlidir.
+
+#include <iostream>
+using namespace std;
+
+void foo() {
+    int* p = new int[10];  // Dinamik bellek tahsisi
+    try {
+        // Hata oluşturabilecek kod
+        throw "Bir hata oluştu";  // Örnek hata
+    }
+    catch (const char* e) {
+        cout << "Hata: " << e << endl;
+        delete[] p;  // Bellek sızıntısını önlemek için belleği serbest bırak
+        throw;  // İstisnayı yeniden fırlat
+    }
+    delete[] p;  // Normal durumda belleği serbest bırak
+}
+
+int main() {
+    try {
+        foo();
+    }
+    catch (const char* e) {
+        cout << "Ana programda yakalanan hata: " << e << endl;
+    }
+    return 0;
+}
+
+
+C++98'de, istisna güvenliği önemli bir konudur. Bir fonksiyonun, istisna oluştuğunda kaynak sızıntılarına veya tutarsız bir duruma yol açmaması önemlidir. 
+Bu amaçla, üç istisna güvenliği seviyesi tanımlanmıştır:
+
+    Temel Garanti: İstisna oluştuğunda, program hiçbir kaynak sızıntısı yapmamalı ve tutarlı bir durumda kalmalıdır.
+    Kuvvetli Garanti: İstisna oluştuğunda, programın durumu istisna öncesi duruma geri dönebilmelidir.
+    İstisna Olmama Garanti: Fonksiyon, hiçbir durumda istisna fırlatmamalıdır.
+    
+    
+#include <iostream>
+using namespace std;
+
+int divide(int a, int b) {
+    if (b == 0) {
+        throw runtime_error("Division by zero!");  // Hata fırlat
+    }
+    return a / b;
+}
+
+int main() {
+    int x = 10;
+    int y = 0;
+
+    try {
+        int result = divide(x, y);  // Bu satırda hata oluşabilir
+        cout << "Result: " << result << endl;
+    }
+    catch (const runtime_error& e) {
+        cout << "Caught an exception: " << e.what() << endl;  // Hata mesajını yazdır
+    }
+
+    return 0;
+}
+
+
+    1.throw İfadesi:
+    divide fonksiyonunda, b değişkeni sıfır olduğunda runtime_error türünde bir istisna fırlatılır. throw ifadesi, hata durumunu belirterek istisna fırlatmak için kullanılır.
+
+    2.try Bloku:
+    main fonksiyonunda, divide fonksiyonu try bloğu içinde çağrılır. Bu blokta hata oluşabilecek kod yer alır.
+
+    3.catch Bloku:
+    catch bloğu, try bloğunda fırlatılan runtime_error türündeki istisnayı yakalar ve işler. what() metodu, istisna nesnesinin hata mesajını döner.
+
+İstisnalar ve Türleri
+
+C++'ta herhangi bir türde istisna fırlatabilirsiniz. Standart kütüphanede yaygın olarak kullanılan bazı istisna türleri şunlardır:
+
+    std::exception: Tüm standart istisnaların temel sınıfıdır.
+    std::runtime_error: Çalışma zamanı hatalarını belirtir.
+    std::logic_error: Mantık hatalarını belirtir.
+    std::out_of_range: Dizi veya konteyner sınırlarının dışında bir erişim durumunda kullanılır.
+    std::invalid_argument: Geçersiz argüman hatalarını belirtir.
+
+Farklı türdeki istisnaları yakalamak için birden fazla catch bloğu tanımlayabilirsiniz:
+
+try {
+    // Hata oluşturabilecek kod
+}
+catch (const std::out_of_range& e) {
+    // std::out_of_range türündeki istisnaları işler
+}
+catch (const std::invalid_argument& e) {
+    // std::invalid_argument türündeki istisnaları işler
+}
+catch (...) {
+    // Herhangi bir türdeki istisnaları işler
+}
+
+
+* İstisnaların yeniden fırlatılması: Bir catch bloğunda istisnayı yeniden fırlatmak isterseniz, throw; ifadesini kullanabilirsiniz.
+* Yıkıcılarda istisna: Yıkıcılar istisna fırlatmamalıdır, çünkü bu durum programın sonlandırılmasına yol açabilir.
+
+
+İstisna türlerine ihtiyaç duymamızın başlıca nedenleri şunlardır:
+
+    Farklı türdeki hataları uygun şekilde işleme.
+    Kapsamlı ve ayrıntılı hata raporlaması.
+    Kodun okunabilirliğini ve bakımını artırma.
+    Polimorfizm ve istisna hiyerarşisi kullanımı.
+    Hataların ayrıntılı incelenmesi.
+
+
+Gerekli Başlık Dosyaları
+
+    <exception> Başlık Dosyası: Tüm standart istisnaların temel sınıfı olan std::exception sınıfını içerir.
+    <stdexcept> Başlık Dosyası: Sıkça kullanılan istisna türlerini (örneğin, std::runtime_error, std::invalid_argument, std::out_of_range) içerir.
+
+what(): exception ile ilgili içeriğe sahip bir c-string işaretçisidir. Özel durumu tanımlamak için kullanılabilecek boş, null ile sonlandırılmış bir karakter dizisi döndürür.
+std::exception sınıfından türetilmiş what() fonksiyonu her zaman 'cons char*' türünden bir değer döndürür.
+
+Ne Zaman Özel İstisna Sınıfı Oluşturmalı?
+
+    Genel Hatalar için: Çoğu durumda, standart kütüphane istisnaları yeterlidir.
+    Belirli Durumlar için: Uygulamanızın belirli hata durumlarını daha iyi açıklamak ve yönetmek için özel istisnalar tanımlayabilirsiniz.
+    Büyük ve Karmaşık Projeler: Kodun okunabilirliğini artırmak ve belirli hataları daha iyi anlamak için özel istisnalar kullanmak faydalı olabilir.

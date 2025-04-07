@@ -1,0 +1,23 @@
+    srand(seed random)(unsined int seed)
+
+rand fonksiyonu 0 ile RAND_MAX(genellike 32767) arasında bir tamsayı döner.
+Dönen değeri belirli bir aralığa döndürmek için srand kullanırız.
+
+srand fonksiyonuna bir tohum değeri verildiğinde(genellike zaman tabanlı), rand fonksiyonu bu değeri kullanarak rastgele sayılar üretir. 
+
+srand(time(nullptr));
+int rastgeleSayi = rand();
+std::cout << "Rastgele Sayı: " << rastgeleSayi << std::endl;
+
+*eğer srand fonksiyonu çağrılmazsa, rand her çalıştırıldığında aynı rastgele
+sayı dizisini döner.
+
+*<ctime> time için, <cstdlib> srand. 
+
+*rand() % 100 ifadesi, 0 ile 99 arasında bir sayı üretir. % (mod) operatörü, rand tarafından döndürülen 
+değeri 100 ile böler ve kalanını döner. Bu şekilde belirli bir aralıkta rastgele sayı üretebilirsiniz.
+
+time_t time(time_t* arg);(genellike nullptr, ek bilgi)
+
+arg parametresi, geçerli zamanı saklamak için kullanılacak bir time_t işaretçisidir. Eğer arg nullptr ise, 
+sadece geçerli zamanı döner ve herhangi bir değişkene yazmaz.

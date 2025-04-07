@@ -1,0 +1,18 @@
+    STL (standard template Library) : Container, algoritma, iterator(tekrarlayıcılar) ve 
+fonksiyonların(functors) bulunduğu bir kütüphanedir.
+
+-> Containers: Dataları tuttuğumuz kutulara deriz. vector, list, map vs.
+*Her konteynırın farklı yetenekleri ve faydaları vardır.
+
+->Algorithms: STL içinde sıralama, arama yapma gibi algoritmalara sahiptir.
+
+->Function Objects(Functors): Hazır algoritmaları (sort() gibi) işimize yarayacak şekilde
+değiştirmek için kullanırız.
+
+->Iterator: Konteynırlar içinde bulunan dataları takip etmek için kullanırız. 
+*Iteratorlar, bir konteynırın elemanları üzerinde dolaşmak için kullanılan nesnelerdir. 
+*Iteratorlar, bir işaretçi gibi çalışır ve * operatörü ile elemanlara erişebiliriz.
+
+
+    List: push_back(), push_front()
+*Değer eklerken bellekte yer belirlememize gerek yoktur, list kendisi resize eder.

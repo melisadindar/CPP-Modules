@@ -1,0 +1,236 @@
+        Templated containers, iterators, algorithms:
+
+
+STL hakkında:
+
+Standart şablon kütüphanesi (Standart Templates Library - STL), hazır sınıf ve fonksiyon 
+şablonları içerir. Bu şablonlar kullandıkları vektör, liste, kuyruk ve yığın gibi yaygın 
+algoritma ve veri yapılarına erişim için fonksiyonlar tanımlar. STL şablon sınıflarından 
+oluşturulduğundan, algoritmalar ve veri yapıları neredeyse her tür veriye uygulanabilir.
+
+STL, birbiriyle bağlantılı olarak çalışan dört temel unsurdan oluşur:
+    Konteynerler (Containers)
+    Algoritmalar
+    Tekrarlayıcılar (Iterators)
+    Fonksiyonlar
+
+
+    Containers:
+
+Konteynerler kütüphanesi, kuyruklar, listeler ve yığınlar gibi ortak veri yapılarının 
+kolayca kullanılmasını sağlayan, genel bir sınıf şablonları ve algoritmalardan oluşur.
+Her biri farklı bir işlem grubu sağlamak üzere tasarlanmış üç konteyner sınıfı vardır:
+
+    Sıralı konteynerler (Sequence containers)
+    İlişkisel konteynerler (Associative containers)
+    Sırasız İlişkisel konteynerler (Unordered associative containers)
+
+    Sequence Containers (Sıralı Konteynerlar):
+        vector: Dinamik boyutlandırılabilen dizidir. Rastgele erişim sağlar, eleman ekleme ve 
+        silme işlemleri amortize O(1) karmaşıklığındadır.
+        deque: Çift uçlu kuyruk olarak bilinir. Elemanların başına ve sonuna hızlı erişim, 
+        ekleme ve silme işlemleri sağlar.
+        list: Çift yönlü bağlı listedir. Eleman ekleme ve silme işlemleri O(1) karmaşıklığındadır, 
+        ancak rastgele erişim yoktur.
+
+    Associative Containers (İlişkisel Konteynerlar):
+        set: Benzersiz anahtarları sıralı olarak saklar. Eleman ekleme, silme ve arama işlemleri 
+        O(log n) karmaşıklığındadır.
+        multiset: Tekrar eden anahtarları sıralı olarak saklar. Eleman ekleme, silme ve arama 
+        işlemleri O(log n) karmaşıklığındadır.
+        map: Benzersiz anahtar-değer çiftlerini sıralı olarak saklar. Anahtarlar benzersizdir. 
+        Eleman ekleme, silme ve arama işlemleri O(log n) karmaşıklığındadır.
+        multimap: Tekrar eden anahtar-değer çiftlerini sıralı olarak saklar. Eleman ekleme, 
+        silme ve arama işlemleri O(log n) karmaşıklığındadır.
+
+    Container Adaptors (Konteyner Adaptörleri):
+        stack: LIFO (Last-In-First-Out) prensibine göre çalışan yığındır. Genellikle deque veya 
+        vector ile kullanılır.
+        queue: FIFO (First-In-First-Out) prensibine göre çalışan kuyruğudur. Genellikle deque ile 
+        kullanılır.
+        priority_queue: Elemanların önceliğine göre sıralanan kuyruğudur. Genellikle vector ile 
+        kullanılır.
+
+Konteyner, elemanları için ayrılan depolama alanını yönetir ve doğrudan veya 
+tekrarlayıcılar (iterators) yolulya elemanlarına erişim sağlamak için üye fonksiyonlar 
+içerir.
+
+Verilerin depolanmasında kullanılan konteynerlerin listesi aşağıdaki tabloda gösterilmektedir:
+
+bitset 	Bir seri bit değeridir.
+deque 	Çift uçlu bir kuyruktur.
+list 	Linear bir listedir.
+map 	Her bir anahtarın tek bir değer ile eşleştiği anahtar/değer ikililerini depolar.
+multimap 	Her bir anahtarın iki veya daha fazla değer ile eşleştiği anahtar/değer ikililerini depolar.
+multiset 	Her bir elemanın benzersiz olması gerekmeyen bir set tanımlar.
+priority_queue 	Öncelikli bir kuyruğu ifade eder.
+queue 	Bir kuyruğu ifade eder.
+set 	İçindeki her bir elemanın benzersiz olduğu bir gruptur.
+stack 	Bir yığını ifade eder.
+vector 	Dinamik bir dizidir.
+
+
+Algoritmalar
+
+Algoritmalar konteynerler içeriğinde yer alan verilere ilk değer verme, sıralama ve arama 
+gibi işlemler yapabilirler.
+
+
+Tekrarlayıcılar (Iterators)
+
+Tekrarlayıcılar, aşağı yukarı işaretçiler gibi davranan nesnelerdir. Bir konteyner içinde 
+yer alan verilere sırasıyla erişim için tekrarlayıcıları kullanabiliriz. 
+
+Bir iterator tanımlayıp kullandıktan sonra yazdırmak istediğimizde başına pointer koymamız gerekir. Çünkü 
+iteratorler pointer mantığıyla çalıştığı için, değeri görmek için pointer kullanırız(Pointer tanımladıktan sonra
+adres değil değer çekme mantığı)
+
+Tekrarlayıcıların beş farklı türü vardır:
+
+Rastgele erişim 	Değerleri depolar ve okur. Elemanlara rastgele erişilebilir.
+Çift yönlü 	Değerleri depolar ve okur. İleri ve geri hareket eder.
+İleri 	Değerleri depolar ve okur. Sadece ileri hareket eder.
+Giriş 	Değerleri okur fakat depolamaz. Sadece ileri hareket eder.
+Çıkış 	Değerleri depolar fakat okumaz. Sadece ileri hareket eder.
+
+İşaretçiler gibi kullanılan tekrarlayıcıları, artırabilir, azaltabilir ve * işlemcisi ile 
+kullanabiliriz. Yineleyiciler, çeşitli konteynerler tarafından tanımlanan yineleyici türü 
+kullanılarak bildirilir. Tekrarlayıcıların bildirimi farklı konteynerler tarafından 
+iterator ifadesi kullanılarak yapılır.
+
+STL ile, ters tekrarlayıcıları da kullanabiliriz. destekler. Ters tekrarlayıcılar, bir dizi 
+boyunca ters yönde hareket eden çift yönlü veya rastgele erişimli tekrarlayıcılardır. 
+Bu nedenle, bir ters tekrarlayıcı bir dizinin sonunu gösterirse, bu tekrarlayıcının 
+artırılması dizinin sondan bir önceki elemanını göstermesini sağlar.
+
+Iterator Türleri
+
+1. Iterator
+
+Iteratorlar, bir konteynırın elemanları üzerinde dolaşmak için kullanılan nesnelerdir. 
+Iteratorlar, bir işaretçi gibi çalışır ve * operatörü ile elemanlara erişebiliriz. İteratörlerin çoğu, 
+++ operatörü ile bir sonraki elemana geçebilir.
+
+2. Const Iterator
+
+const_iterator, elemanların değerlerini değiştirmeden bir konteynırın elemanları üzerinde iterasyon 
+yapmayı sağlar. Bu, elemanları yalnızca okunabilir kılar ve değiştirilmesine izin vermez.
+
+3. Reverse Iterator
+
+reverse_iterator, bir konteynırın elemanları üzerinde ters sırada iterasyon yapmayı sağlar. 
+Yani, son elemandan başlayarak ilk elemana doğru iterasyon yapılır.
+
+4. Const Reverse Iterator
+
+const_reverse_iterator, elemanların değerlerini değiştirmeden bir konteynırın elemanları 
+üzerinde ters sırada iterasyon yapmayı sağlar.
+
+
+Fonksiyonlar
+
+Konteynerler, algoritmalar ve tekrarlayıcıların yanı sıra karşılaştırma fonksiyonları ve 
+fonksiyon nesneleri yer almaktadır.
+
+<functional> başlık dosyası içindeki şablonlar, operator() tanımlayan nesneleri oluşturmamıza 
+yardımcı olur. Bunlar fonksiyon nesneleri olarak adlandırılır ve birçok yerde fonksiyon 
+işaretçileri yerine kullanılabilirler. <functional> başlık dosyasında içinde bildirilmiş 
+önceden tanımlanmış birkaç fonksiyon nesnesi aşağıda gösterilmektedir:
+
+En yaygın kullanılan fonksiyon nesnesi olan less, bir nesnenin diğerinden daha küçük 
+olduğunu belirler. Fonksiyon nesneleri, STL algoritmalarında gerçek fonksiyon 
+işaretçilerinin yerine kullanılabilir. Fonksiyon işaretçileri yerine fonksiyon 
+nesnelerini kullanmak, STL'nin daha verimli kod üretmesini sağlar.
+
+
+
+    std::vector:
+
+Dinamik boyutlu dizi taşıyıcısıdır. C++ STL içerisinde en fazla kullanılan ve 
+performansı en yüksek olan taşıyıcıdır.
+
+
+
+push_back fonksiyonu: STL (Standard Template Library) konteynerlerinde bir elemanı 
+konteynerin sonuna eklemek için kullanılan bir üye fonksiyondur. Bu fonksiyon, 
+özellikle dinamik boyutlandırılmış konteynerler (örneğin std::vector, std::deque ve 
+std::list) için geçerlidir.
+
+Eğer konteynerin kapasitesi yeterli değilse, std::vector ve std::deque konteynerlerinde 
+yeni bir kapasite ayarlanarak veri yeniden tahsis edilir. Bu işlem, belirli bir zaman 
+karmaşıklığına (amortize O(1)) sahiptir.
+
+Diğer STL konteynerleri (örneğin std::set, std::map) için push_back fonksiyonu yoktur, 
+çünkü bu konteynerler sıralı ve benzersiz elemanlar içerir ve doğrudan ekleme yöntemleri 
+farklıdır (insert gibi).
+
+Amortize O(1): bir algoritmanın veya işlemin uzun vadede ortalama çalışma süresini ifade eder. 
+
+Amortize analiz: bir dizi işlemin toplam maliyetini değerlendirir ve bu maliyeti her bir işlem 
+başına yayar. Bu, bazı işlemler tek başına pahalı olabilse bile, genel performansın etkili 
+bir şekilde sabit süreli (O(1)) olduğunu gösterir.
+
+std::vector'un push_back fonksiyonunu ele alalım:
+
+1.Normal Durumda O(1): std::vector'a eleman eklemek genellikle O(1) zaman alır. Bunun nedeni,
+vektörün sonuna bir eleman eklemek için sadece bir hafıza yazma işleminin yapılmasıdır.
+
+2.Kapasite Aşıldığında O(n): Ancak, vektörün mevcut kapasitesi dolduğunda, yeni bir eleman 
+eklemek için vektörün kapasitesi iki katına çıkarılır. Bu işlem, vektördeki mevcut tüm 
+elemanların yeni, daha büyük bir bellek alanına kopyalanmasını gerektirir ve bu da O(n) 
+zaman alır.
+
+Amortize analizde, kapasite aşımının nadiren gerçekleşmesi göz önüne alınarak işlemlerin 
+ortalama maliyeti hesaplanır. İşte nasıl çalıştığı:
+
+    *Diyelim ki vektörün kapasitesi başlangıçta 1 ve her dolduğunda kapasite iki katına çıkarılıyor.
+    *İlk eleman eklendiğinde, kapasite 1'den 2'ye çıkarılır (O(1) maliyet).
+    *İkinci eleman eklendiğinde, kapasite 2'den 4'e çıkarılır (O(1) maliyet).
+    *Üçüncü ve dördüncü elemanlar eklendiğinde, kapasite değiştirilmeden eklenir (O(1) maliyet).
+
+Yani özetle verdiğim bir değere gelene kadara push_back fonksiyonu O(1) zaman alır, Ancak
+kapasite dolduğunda kapasite arttırma nedeniyle O(n) zaman alır.
+
+list ve vector farkları: Eleman sayımız belli olduğunda ya da küçük tip işler yaptığımızda genelde
+vectör kullanırız. vectorde push_back fonksiyonuyla ekleme yaparız ve bu dizinin en sonuna ekleme yapar,
+aynı fonskiyon listde de mevcuttur. Artı olarak push_front ile dizinin başına ekleme yapma fonksiyonunada
+sahiptir. listler de index index erişemiyoruz zaten liste halinde olduğu için.
+vector<int> v1(10);
+vector<int> v2(&v1[4], &v1[9]);//burda v2yi v1 in 4 ve 9. indexleri arasındakı verilerden oluşturuyoruz.
+
+list<int> l1(10);
+list<int> l2(l1.begin(), l1.end())//listelerde de bu şekilde yapabiliyoruz.
+
+listlerde birleştirme yapabiliriz. Sıralı birleştirme sort() -> merge()
+
+Aynı zamanda vectorlerde kullandığımız begin() + 1 i kullanamayız. İteratorler her containerda farklı çalışır.
+
+Queue: First in first out. Diğerleri gibi fazla yapıcı metodu yoktu. Basit bir yapıcı ve copya yapıcıya sahiptir.
+Diğerlerindeki gibi iteratorlere sahip değildir, çünkü sadece sıralarını takip etme işlemi yaparız. push()sona ekler.
+
+Stack: last in first out. Diğerleri gibi fazla yapıcı metodu yoktu. Basit bir yapıcı ve copya yapıcıya sahiptir.
+Diğerlerindeki gibi iteratorlere sahip değildir, çünkü sadece sıralarını takip etme işlemi yaparız. push()sona ekler.
+front yerine top() metodu kullanılır(ilk elemanı çağırmak için).
+push() diğerleri gibi sona değil başa ekler. pop() da baştan çıkarır.
+
+
+typename T::const_iterator it = std::find(container.begin(), container.end(), value);
+
+burad T türünde bir iterator oluşturuyoruz it adında, daha sonra find algoritmasıyla 
+value değereini begin ile end arasındaki değerler arasında arıyoruz, değer bulunamazsa 
+container.end() iteratorü döner. 
+Bunun nedeni, std::find fonksiyonunun değer bulunamadığında arama alanının sonuna ulaştığını 
+belirtmesidir. container.end() iterator'u, kapsayıcının sonundan bir sonraki konumu temsil 
+eder ve geçerli bir elemanı işaret etmez. Bu, kapsayıcının sonuna ulaşıldığını ve aranan 
+değerin kapsayıcıda bulunmadığını belirtmek için standart bir yöntemdir.
+
+std::sort: <algorithm> başlığı altında bulunan bir algoritmadır. Bir dizi veya vektörü 
+sıralamak için kullanılır.
+
+std::pair ve std::make_pair: C++98 standardında bulunan ve <utility> başlığı altında 
+tanımlanan bileşenlerdir. std::pair iki değeri birleştiren bir sınıftır ve std::make_pair 
+iki değeri alıp bir std::pair döndüren yardımcı bir işlevdir.
+
+
+-> std::stack'in üye değişkeni olan c, temel konteynırı temsil eder ve iteratorler
+bu konteynır üzerinden çalışır.

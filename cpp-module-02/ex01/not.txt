@@ -1,0 +1,64 @@
+        sabit noktalı değere dönüştürme
+Diyelim ki 8 bitlik bir sabit noktalı sayı sistemimiz var. Bu sistemde, 1 bit işareti için, 
+3 bit tam kısmı için ve 4 bit ondalık kısmı için ayrılmış bir yapı düşünelim.
+
+Şimdi, 10010110 sayısını ele alalım. Bu sayıyı sabit noktalı formatta yorumlamak için önce 
+bu bitleri gruplara ayırırız:
+
+    İşaret biti: 1 (negatif sayıyı temsil eder)
+    Tam kısmı: 001 (3 bit)
+    Ondalık kısmı: 0110 (4 bit)
+
+Şimdi bu grupları yorumlarız:
+
+    İşaret biti 1 olduğu için, bu sayı negatif bir sayıyı temsil eder.
+    Tam kısmı, 001, ikili sistemde 1'le çarpılarak 1 elde edilir.
+    Ondalık kısmı, 0110, ikili sistemde 6'ya karşılık gelir.
+
+Sonuç olarak, bu sabit noktalı sayı -1.0110 olarak yorumlanır. Burada, tam kısmı 1, 
+ondalık kısmı ise 6 olacak şekilde -1.0110 değeri elde edilir.
+
+
+Örn2:
+Diyelim ki 16 bitlik bir sabit noktalı sayı sistemimiz var. Bu sistemde, 1 bit işareti için, 
+7 bit tam kısmı için ve 8 bit ondalık kısmı için ayrılmış bir yapı düşünelim.
+
+1011001100110011
+
+Bu sayıyı sabit noktalı formatta yorumlamak için gruplara ayıralım:
+
+    İşaret biti: 1 (negatif sayıyı temsil eder)
+    Tam kısmı: 0110011 (7 bit)
+    Ondalık kısmı: 00110011 (8 bit)
+
+İşaret biti 1 olduğu için, bu sayı negatif bir sayıyı temsil eder. Tam kısmı 0110011, 
+ikili sistemde 51'i temsil eder. Ondalık kısmı 00110011, ikili sistemde 51'e karşılık gelir.
+
+Sonuç olarak, bu sabit noktalı sayı -51.515625 olarak yorumlanır.
+
+
+        std::ostream:
+'std::ostream' C++ standart kütüphanesinde tanımlanan bir sınıftır ve çıkış işlemlerini 
+gerçekleştirmek için kullanılır. 'ostream', bir akış nesnesidir ve çeşitli türlerdeki 
+verileri standart çıkış cihazlarına (std::cout, dosyalara yazma, vb.) göndermek için kullanılır.
+std::ostream, tüm çıkış akışlarının temel sınıfıdır. Örneğin, std::cout ve dosya işlemi için kullanılan
+std::ofstream sınıfları, std::ostream sınıfından türetilir.
+Bir std::ostream nesnesi, çeşitli türlerdeki verileri çıkışa aktarmak için farklı işlevler sağlar. Örneğin:
+
+    operator<<: Farklı veri türlerini çıkış akışına eklemek için kullanılır. Bu operatör, 
+    bir akış nesnesine veri eklemek için aşırı yüklenebilir. Bu, örneğin std::cout << "Hello, world!" gibi 
+    kullanımlara olanak tanır.
+    put(): Tek bir karakteri çıkış akışına eklemek için kullanılır.
+    write(): Bir bellek bloğunu belirtilen boyutta çıkış akışına eklemek için kullanılır.
+
+Kısaca ostream sınıfı, bir akış ara belleğine biçimlendirilmiş çıktı veya ekleme gerçekleştirmek 
+için << çıktı operatörünü kullanmamızı sağlar.
+
+Daha basite indirgersek << operatörü nesneleri yazdıramaz biz yazmalarını sağlıyoruz.
+
+ostream ile operator overload yapmanın iki yolu var. Biri örnek olarak a + b olsun, a ve b iki farklı 
+sınıfı olan iki farklı nesne. Bu ifadeyi derlemek için a sınıfındaki '+' yı aşırı yüklemeli veya '+' yı 
+global bir fonskiyon yapmalıyız.
+
+
+

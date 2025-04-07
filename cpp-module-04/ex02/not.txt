@@ -1,0 +1,32 @@
+    Abstract(soyutlama):
+Soyutlama, genellikle veri soyutlama amacıyla kullanılır. Veri soyutlama kullanımı için, 
+içinde en az bir adet saf sanal fonksiyon bulunan soyut (abstract) bir sınıf oluşturulur. 
+Bir sınıf içinde en az bir adet saf sanal fonksiyon tanımlanırsa, bu sınıf soyut (abstract) sınıf haline gelir. 
+Bu soyut sınıf kendisinden türetilen alt sınıfların ortak değişkenlerini ve fonksiyonlarını içerir. 
+Soyut bir sınıftan türetilen tüm sınıflarda sanal fonksiyon bildirimi yeniden yapılmalıdır. Eğer yapılmazsa, 
+türetilen sınıflarda soyut sınıf olarak kabul edilir. Soyut sınıflar saf sanal fonksiyon dışında normal 
+fonksiyonlar ve değişkenler içerebilir.
+
+Soyut sınıfları kullanılarak geliştirilen yazılımlarda değişiklik yapmak gerektiğinde, 
+soyut sınıflarda yer alan ve türetilen sınıflar tarafından kullanılan private erişim özelliğine değişkenlerin 
+değiştirilmesi yeterli olmaktadır. Soyut sınıflarda bildirimi yapılan private değişkenler veri güvenliğini 
+artırır ve program kodlarının daha pratik yazılmasını sağlar.
+
+    Pure Virtual(saf sanal):
+Bir temel sınıf içinde bulunan, kod bloğu içermeyen ve bildirim satırında 0 değerine eşit olacak şekilde bildirimi yapılan sanal
+fonksiyonlara saf sanal fonk adı verilir. 
+
+virtual void makeSound() = 0;
+
+Saf sanal işlev olarak tanımlanmadığı için bu temel sınıfdan türetilen her sınıf, kendi makeSound() metodunu sağlamak zorundadır.
+
+*Bir sınıf içinde bir tane bile olsa saf sanal fonks. varsa bu sınıf abstract(soyut) sınıf haline gelir. Soyut sınıflardan nesne
+oluşturulamaz.
+
+*Soyut sınıflardan neden nesne oluşturulmaz?
+Saf sanal fonksiyonlar, temel sınıf tarafından sağlanan bir ara yüz tanımlar, ancak bu fonksiyonların gerçek uygulamalrı yoktur.
+Bu nedenle, bu  soyut sınıfından nesne oluşturulmaz çünkü bu sınıfın  tam olarak uygulaması yoktur. Nesne oluşturulamaz çünkü
+bu sınıfın tam olarak uygulanması mümkün değildir.
+
+Soyut sınıflar genellikle bir ara yüz sağlamak için kullanılır. Örn. bir şekil sınıfı, alan ve çevre gibi saf sanal fonksiyonlar 
+içerebilir. Ancak bir soyut sınıftan doğrudan bir shape nesnesi oluşturulmaz.

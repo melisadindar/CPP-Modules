@@ -1,0 +1,16 @@
+Shallow Copy ile Deep Copy arasındaki fark nedir?
+
+Shallow Copy - Sığ kopyada, orijinal nesnenin bir kopyası saklanır ve son olarak yalnızca referans adresi kopyalanır. Hızlıdır.
+
+Deep Copy - Derin kopyada, orijinal nesnenin kopyası ve tekrarlayan kopyaların her ikisi de saklanır. Shallow a göre yavaştır.
+
+
+Shallow Copy: Bir nesne başka bir nesnede referans alarak kopyalandığında, orijinal nesne ve kopyalanan nesne aynı adresi paylaşır.
+Bir nesne değiştirildiğinde diğer nesne de etkilenir çünkü aynı bellek alanını paylaşırlar.
+Deep Copy: Derin kopyalama işlemi bir nesnenin içeriğini başka bir nesneye kopyalarken, nesnenin içindeki tüm verilerin ve 
+alt nesnelerin ayrı kopyalarınının oluşturulmasın anlamına gelir, bu durum sağlanırken kopyalanan nesne farklı bellek alanında 
+tutulur. Bu nedenle nesnelerden birinde yapılan herhangi bir değişiklik diğer nesneyi etkilemez.
+
+* Dinamik olarak oluşturulmuş bir dizi veya bir nesne varsa, bu durumda derin kopyalama (deep copy) yapılması gerekebilir.
+Bunun sebebi bariz shallow ve deep copynin farkından gelen bellek olayı(yukarda yazdığım).
+

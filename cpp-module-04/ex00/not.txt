@@ -1,0 +1,21 @@
+Polimorfizm: Polimorfizm, aynı adı taşıyan ancak farklı davranışlara sahip olan metotların kullanılmasını sağlar. 
+Bu, farklı türlerdeki nesneleri ortak bir arayüz üzerinden işleyerek, kodunuzu daha genelleştirilmiş hale getirir.
+
+Const ve pointer kullanarak nesne oluşturmanın bazı özel durumlar için avantajları olabilir:
+
+    Dinamik Bellek Yönetimi: new anahtar kelimesiyle dinamik bellek üzerinde nesne oluşturduğunuzda, 
+    nesne yaşam döngüsünü sizin kontrol etmeniz gerekir. Bu, nesnenin bellekten silinmesi gerektiğinde, 
+    delete anahtar kelimesini kullanarak belleği serbest bırakmanız gerekir. Bu yöntem, 
+    nesnelerin yaşam sürelerini dinamik olarak yönetmenize olanak tanır.
+
+    Polimorfizm ve Soyutlama: Pointerlar, genellikle polimorfizm ve soyutlamayı desteklemek için kullanılır. 
+    Bir üst sınıfın işaretçisi, alt sınıflardan herhangi birine işaret edebilir. 
+    Bu, farklı türdeki nesneleri aynı arayüz üzerinden işleyebilmenizi sağlar. 
+    Aynı zamanda, const anahtar kelimesi, işaretçinin gösterdiği nesnenin değiştirilemez olduğunu belirtir, 
+    böylece nesnenin durumunu korur ve hatalı değişikliklerden kaçınır.
+
+    Veri Büyüklüğü ve Performans: Büyük nesneler oluşturulduğunda, bu nesnelerin kopyalanması gerekebilir. 
+    Ancak, pointerlar kullanılarak sadece bellek adresi kopyalanır, bu da veri büyüklüğünü azaltır ve performansı artırır.
+
+    İşaretçinin Değiştirilebilirliği: Bir işaretçi, programın çalışma zamanında işaret ettiği nesneyi değiştirebilir. 
+    Bu, programın dinamik olarak davranmasını sağlar ve uygulamanın gereksinimlerine daha iyi uyum sağlar.

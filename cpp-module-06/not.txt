@@ -1,0 +1,188 @@
+    Scalar Type(Skaler tür):
+Tek bir değer içeren veri türlerini ifade eder. Bu türler, kompleks veri yapıları veya nesneler 
+içermezler ve bellek üzerinde tek bir değeri temsil ederler. C++'ta skaler türler aşağıdaki 
+kategorilere ayrılabilir:
+
+1. Temel Veri Türleri (Fundamental Types)
+
+    Tamsayılar (Integers):
+        int, short, long, long long ve bunların işaretsiz (unsigned) versiyonları 
+        (unsigned int, unsigned short, unsigned long, unsigned long long).
+    Karakterler (Characters):
+        char, signed char, unsigned char, wchar_t, char16_t, char32_t.
+    Kayan Noktalı Sayılar (Floating-point Numbers):
+        float, double, long double.
+    Boolean:
+        bool.
+
+2. İşaretçiler (Pointers)
+
+    int* ptr;    // int türünde bir işaretçi
+    double* dptr; // double türünde bir işaretçi
+
+3. Üyelik İşaretçileri (Member Pointers) : Sınıf üyelerine işaret eden işaretçiler.
+
+    struct MyClass {
+    int member;
+    };
+
+    int MyClass::* memberPtr = &MyClass::member;
+
+4. Enumerasyonlar (Enumerations)
+
+    Basit enum türleri.
+
+    enum Color { RED, GREEN, BLUE };
+    Color c = RED;
+
+Skaler Türlerin Özellikleri
+
+    Depolama ve Performans: Skaler türler, genellikle bellek üzerinde sabit bir alan kaplar ve 
+    erişim ile işlem yapma süresi belirgindir, bu yüzden performans açısından avantajlıdır.
+    Yönlendirilebilirlik: İşaretçiler, belirli bir veri türünün bellek adresini tutar ve dolaylı 
+    olarak bu veriye erişim sağlar. İşaretçilerin kullanımı dikkat gerektirir çünkü yanlış kullanımları 
+    bellek hatalarına neden olabilir.
+    Basitlik: Skaler türler, daha karmaşık veri yapıları veya nesneler içermediğinden, 
+    programcılar tarafından anlaşılması ve yönetilmesi daha kolaydır.
+
+
+            * Tür Dönüşümleri *
+
+
+C++ dilinde tür dönüşümü (type casting), bir veri tipini başka bir veri tipine dönüştürme işlemidir. 
+C++'ta tür dönüşümü dört ana şekilde gerçekleştirilir: C-tarzı tür dönüşümü, static_cast, 
+dynamic_cast, const_cast ve reinterpret_cast.
+
+1. C-Tarzı Tür Dönüşümü
+
+C-tarzı tür dönüşümü, C dilinde kullanılan geleneksel tür dönüşüm şeklidir. C++'ta da kullanılabilir,
+ancak genellikle önerilmez çünkü diğer dönüşüm türlerine göre daha az güvenlidir ve hataları yakalamak daha zordur.
+
+    int a = 10;
+    double b = (double)a; // C-tarzı tür dönüşümü
+
+2. static_cast
+
+static_cast, derleme zamanında (compile-time) yapılan tür dönüşümlerinde kullanılır ve genellikle 
+güvenli tür dönüşümleri için tercih edilir. static_cast, aritmetik tür dönüşümleri ve temel 
+sınıf-türemiş sınıf ilişkilerinde kullanılır.
+
+    int a = 10;
+    double b = static_cast<double>(a); // int'den double'a dönüşüm
+
+    Base* basePtr = new Derived();
+    Derived* derivedPtr = static_cast<Derived*>(basePtr); // Base'den Derived'e dönüşüm
+
+3. dynamic_cast
+
+dynamic_cast, genellikle çalışma zamanında (runtime) yapılan ve polimorfizmle ilgili tür 
+dönüşümlerinde kullanılır. dynamic_cast, başarılı dönüşüm yapamazsa nullptr döner 
+(pointer'lar için) veya bad_cast istisnası atar (referanslar için).
+
+dynamic_cast, çalışma zamanında tür kontrolü yapar ve bu sayede hangi türemiş sınıfın
+işaret edildiğini tespit edebilirsiniz.
+
+upcasting - Taban sınıf işaretçisini veya referansını türemiş sınıf işaretçisine veya referansına dönüştürmek 
+downcasting - Türemiş sınıf işaretçisini veya referansını taban sınıf işaretçisi veya referansına dönüştürmek.
+
+    Base* basePtr = new Derived();
+    Derived* derivedPtr = dynamic_cast<Derived*>(basePtr); // Base'den Derived'e güvenli dönüşüm
+    if (derivedPtr != nullptr) {
+        // Dönüşüm başarılı
+    } else {
+        // Dönüşüm başarısız
+    }
+
+4. const_cast
+
+const_cast, bir nesnenin const veya volatile niteliklerini kaldırmak veya eklemek için kullanılır. 
+Bu dönüşüm, yalnızca const veya volatile nitelikleri değiştirir, veri türünü değiştirmez.
+
+    const int a = 10;
+    int* b = const_cast<int*>(&a); // const int'den int*'e dönüşüm
+    *b = 20; // Uygunsuz ve tehlikeli
+
+5. reinterpret_cast
+
+reinterpret_cast, iki nesne türü arasında bit düzeyinde dönüşüm yapmak için kullanılır. 
+Genellikle bellek adreslerini farklı türdeki işaretçilere dönüştürmek için kullanılır ve en 
+tehlikeli tür dönüşümü olarak kabul edilir. Güvenli değilse kullanımı önerilmez.
+
+    int a = 10;
+    int* p = &a;
+    char* c = reinterpret_cast<char*>(p); // int*'den char*'e dönüşüm
+
+Tür dönüşümleri C++'ta dikkatli kullanılmalıdır çünkü yanlış dönüşümler program hatalarına ve 
+beklenmeyen davranışlara yol açabilir. static_cast, belirli ve güvenli dönüşümler için; dynamic_cast, 
+çalışma zamanı tür güvenliği için; const_cast, nitelik değişiklikleri için ve reinterpret_cast, 
+düşük seviyeli bit dönüşümleri için kullanılır. C-tarzı tür dönüşümü ise mümkün olduğunca 
+kaçınılmalıdır çünkü diğer tür dönüşümlerinin sunduğu güvenlik kontrollerini sağlamaz.
+
+
+        Static:
+
+        
+Statik sınıf üyeleri, sınıfın tüm nesneleri tarafından paylaşılır ve sınıfın kendisine aittir, 
+yani herhangi bir sınıf örneğine (nesnesine) bağlı değildir. Statik sınıf üyeleri, sınıf dışından 
+da sınıf ismi kullanılarak erişilebilir.
+
+Statik veri üyeleri, sınıfın içinde static anahtar kelimesi ile tanımlanır ve sınıfın dışında başlatılmalıdır.
+
+#include <iostream>
+
+class MyClass {
+public:
+    static int staticVar; // Statik veri üyesi bildirimi
+
+    static void staticFunction() { // Statik üye fonksiyonu
+        std::cout << "Static Function: " << staticVar << std::endl;
+    }
+};
+
+// Statik veri üyesi sınıf dışında tanımlanmalıdır
+int MyClass::staticVar = 0;
+
+int main() {
+    // Statik veri üyesine sınıf adıyla erişim
+    MyClass::staticVar = 10;
+    MyClass::staticFunction();
+
+    // Statik veri üyesine nesne üzerinden de erişim (pek yaygın değil)
+    MyClass obj;
+    obj.staticVar = 20;
+    obj.staticFunction();
+
+    return 0;
+}
+
+
+Statik üye fonksiyonları, static anahtar kelimesi ile tanımlanır ve sınıfın herhangi bir nesnesine 
+bağlı olmadan çağrılabilir.
+Statik üye fonksiyonları sadece statik veri üyelerine ve diğer statik üye fonksiyonlarına erişebilir.
+Statik veri üyeleri, sınıfın tüm nesneleri tarafından paylaşılır ve bellekte yalnızca bir kez yer alır.
+Statik üye fonksiyonları, sınıfın nesnesine bağlı olmadan çağrılabilir ve yalnızca statik veri 
+üyelerine veya diğer statik üye fonksiyonlarına erişebilir.
+Statik veri üyeleri sınıf tanımının dışında başlatılmalıdır. Statik üye fonksiyonlarının 
+tanımları ise sınıfın içinde veya dışında yapılabilir.
+
+Statik üyeler, genellikle sınıf genelinde ortak olarak kullanılacak verileri veya 
+işlevleri tanımlamak için kullanılır. Bu tür üyeler, belirli bir sınıfın örneklerinden 
+bağımsız olarak çalışabilme yeteneğine sahiptir ve bu da onları bazı özel durumlarda 
+oldukça kullanışlı hale getirir.
+
+std::cout << "MyClass::staticVar: " << MyClass::staticVar << std::endl;
+
+Statik üyeler, sınıfın örneklerinden bağımsızdır ve sınıfın kendisine ait olmalarından dolayı,
+herhangi bir nesne üzerinden erişildiğinde bile aynı değeri gösterirler. 
+Bu, statik olmayan üyelerden farklıdır çünkü statik olmayan üyeler her nesne için ayrı ayrı yer 
+kaplar ve farklı değerlere sahip olabilirler.
+
+C++'ta statik sınıf kavramı bulunmaz, ancak tüm üyeleri statik olan bir sınıf oluşturabilirsiniz.
+
+literal.find('.'):
+Bu metot, string içinde belirtilen karakterin veya alt string'in ilk bulunduğu yerin pozisyonunu döner. 
+Eğer karakter bulunamazsa std::string::npos döner.
+
+std::string::npos:
+Bu, std::string sınıfının statik bir üyesidir ve find metodu tarafından aranan karakter veya alt string 
+bulunamadığında dönen bir değeri temsil eder. Genellikle npos -1 olarak tanımlanır.
